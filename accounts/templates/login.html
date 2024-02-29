@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .background-reg{
+        background-image: url("{% static 'img/new.jpg' %}"); 
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+<div class="row">
+    <nav class="navbar">
+        <div class="navbar-header">
+            <a class="navbar-brand reg-nav" href="" style="color: red;">STUDIOS</a>
+        </div>
+    </nav>
+</div>
+<div class="background-reg">
+    <div class="container reg-con">
+        <div class="reg-form">
+            <div>
+                <h3>Log IN</h3>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+            
+                <div class="mb-3">
+                    {{form.username}}
+                </div>
+                <div class="mb-3">
+                    {{form.password}}   
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .reg-nav{
+    padding-left: 140px;
+    font-size:  26px;
+    }
+    body{
+      background-color: black;
+    }
+    .movie-poster{
+      padding-top: 50px;
+      padding-left: 50px;
+      width: 500px;
+      height: 400px;
+    }
+    .movie-details{
+      padding-right: 20px;
+      position: relative;
+      top: 50px;
+      color: white;
+      /* background-color:#3b4348; */
+    }
+    .play-button{
+      padding-top: 20px;
+      display: flex;
+      
+    }
+    .play-button .btn{
+      width:100px;
+    }
+  </style>
+  </head>
+  <body>
+    <div class="containerfluid">
+      <div class="row">
+        <nav class="navbar">
+            <div class="navbar-header">
+                <a class="navbar-brand reg-nav" href="" style="color: red;">STUDIOS</a>
+            </div>
+        </nav>
+    </div>
+      <div class="row">
+        <div class="col-6">
+          <a href="{% url 'watchnow' movie.id %}">
+            <img src="{{movie.poster.url}}" alt="" class="movie-poster">
+          </a>
+
+        </div>
+        <div class="col-6">
+          <div class="movie-details">
+            <h4>{{movie.name}}</h4>
+            <p><strong>Genre:{{movie.type}}</strong>
+            <p>Year:{{movie.date}}</p>
+            <p>{{movie.description}}</p>
+            <strong><a href="{{movie.link}}" style="color: white;">Trailer</a></strong>
+            <h6>Cast and Crew</h6>
+            {% for cast in movie.crew.all %}
+            <li>{{ cast.crew_name }} ({{ cast.get_crew_type_display }})</li>
+            {% endfor %}
+            <div class="play-button">
+              <a href="{% url 'watchnow' movie.id %}"><button type="button" class="btn btn-light">Play</button></a>
+              <form action="{% url 'fav' movie.id %}" method="post">
+                {% csrf_token %}
+                  <button class="btn btn-light" style="margin-left: 20px;"> Favourite</button>
+              </form>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </div>
+   
+  </body>
+</html>

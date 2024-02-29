@@ -1,0 +1,113 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  
+    .container{
+        position: relative;
+        top: 10px;
+    }
+    .nav-button{
+        position: relative;
+        left:900px;
+        width: 100px;
+        height: 35px;
+    }
+    .reg-heading{
+        position: absolute;
+        top: 200px;
+        left: 220px;
+    }
+    .reg-heading-para{
+        padding-top: 15px;
+        position: relative; 
+        left: 30%;
+
+    }
+    .reg-heading-para-two{
+        padding-top: 15px;
+        position: relative;
+        left:20%;
+        padding-bottom: 15px;
+    }
+    .reg-button{
+        position: relative;
+        left: 40%;
+        width: 150px;
+        padding: 10px;
+    }
+    .ftr-home{
+        position: relative;
+        top: 800px;
+    } 
+</style>  
+
+</head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <nav class="navbar">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="" style="color: red;">STUDIOS</a>
+                </div>
+                <div class="btn btn-danger nav-button">
+                    <a href="{% url 'login' %}" style="color: white;">Sign In</a>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="reg-heading">
+                <h1>Unlimited movies, TV shows and more</h1>
+                <h4 class="reg-heading-para">Watch anywhere.Cancel anytime</h4>
+                <h4 class="reg-heading-para-two">Ready to watch? Click on the Get started</h4>
+                <a href="{% url 'reg' %}" class="btn btn-danger reg-button" style="color: white;">Get started > </a>
+            </div>
+        </div>      
+    </div>
+    <div class="containerfluid ftr-home">
+        <footer>
+            <div class="row" style="padding-bottom: 50px;">
+                <div class="col-3" style="padding-left: 70px;">
+                    <a style="color: black;"  href="">FAQ</a><br>
+                    <a style="color: black;" href="">Inverstor Relations</a><br>
+                    <a style="color: black;" href="">Privacy</a><br>
+                    <a style="color: black;" href="">Speed Test</a>
+                </div>
+                <div class="col-3">
+                    <a style="color: black;" href="">Help Centre</a><br>
+                    <a style="color: black;" href="">Jobs</a><br>
+                    <a style="color: black;" href="">Cookie preferences</a><br>
+                    <a style="color: black;" href="">Legal Notices</a>
+                </div>
+                <div class="col-3">
+                    <a style="color: black;" href="">Account</a><br>
+                    <a style="color: black;" href="">way to watch</a><br>
+                    <a style="color: black;" href="">corporate information</a><br>
+                    <a style="color: black;" href="">Only on Studios</a>
+                </div>
+                <div class="col-3">
+                    <a style="color: black;" href="">Media</a><br>
+                    <a style="color: black;" href="">Terms of Use</a><br>
+                    <a style="color: black;" href="">Contact us</a><br>
+                </div>
+            </div>
+        </footer>
+            
+        </div>
+    </div>
+
+  </body>
+</html>
