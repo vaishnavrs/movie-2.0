@@ -43,7 +43,32 @@ class PlayVideoView(View):
 class ProfileView(View):
     def get(self,request):
         movie=Movie.objects.filter(user=self.request.user)
-        return render(request,"profile.html",{'movies':movie})
+        user_obj = User.objects.filter(pk=request.user.pk).first()
+        form=UserUpdateForm(initial={
+            'first_name':user_obj.first_name,
+            'last_name':user_obj.last_name,
+             'email':user_obj.email,
+             'username':user_obj.username
+             })
+        return render(request,"profile.html",{'movies':movie,'form':form})
+    
+    def post(self,request):
+
+        movie=Movie.objects.filter(user=self.request.user)
+        user_obj = User.objects.filter(pk=request.user.pk).first()
+        form_data=UserUpdateForm(data=request.POST)
+        if form_data.is_valid():
+            user_obj.first_name=form_data.cleaned_data.get('first_name')
+            user_obj.last_name=form_data.cleaned_data.get('last_name')
+            user_obj.email=form_data.cleaned_data.get('email')
+            user_obj.username=form_data.cleaned_data.get('username')
+            user_obj.save()
+            return redirect('profile')
+        else:
+            return render(request,'profile.html',{'form':form_data,'movies':movie})
+
+        
+
 
     
 
@@ -87,27 +112,28 @@ class UploadMovieView(View):
             return redirect('profile')
         return render(request, 'upload.html', {'form': form, 'formset': formset})
     
-class ProfileEditView(View):
+# class ProfileEditView(View):
 
-    def get(self,request,*args,**kwargs):
-        u_id=kwargs.get('id')
-        user_obj=User.objects.get(id=u_id)
-        form=UserUpdateForm(initial={'first_name':user_obj.first_name,'last_name':user_obj.last_name,'email':user_obj.email,'username':user_obj.username})
-        return render(request,'update_profile.html',{'form':form})
+#     def get(self,request,*args,**kwargs):
+#         u_id=kwargs.get('id')
+#         user_obj=User.objects.get(id=u_id)
+#         form=UserUpdateForm(initial={'first_name':user_obj.first_name,'last_name':user_obj.last_name,'email':user_obj.email,'username':user_obj.username})
+#         print(form)
+#         return render(request,'profile.html',{'form':form})
 
-    def post(self,request,*args,**kwargs):
-        u_id=kwargs.get("id")
-        user_obj=User.objects.get(id=u_id)
-        form_data=UserUpdateForm(data=request.POST)
-        if form_data.is_valid():
-            user_obj.first_name=form_data.cleaned_data.get('first_name')
-            user_obj.last_name=form_data.cleaned_data.get('last_name')
-            user_obj.email=form_data.cleaned_data.get('email')
-            user_obj.username=form_data.cleaned_data.get('username')
-            user_obj.save()
-            return redirect('profile')
-        else:
-            return redirect(request,'update_profile.html',{'form':form_data})
+#     def post(self,request,*args,**kwargs):
+#         u_id=kwargs.get("id")
+#         user_obj=User.objects.get(id=u_id)
+#         form_data=UserUpdateForm(data=request.POST)
+#         if form_data.is_valid():
+#             user_obj.first_name=form_data.cleaned_data.get('first_name')
+#             user_obj.last_name=form_data.cleaned_data.get('last_name')
+#             user_obj.email=form_data.cleaned_data.get('email')
+#             user_obj.username=form_data.cleaned_data.get('username')
+#             user_obj.save()
+#             return redirect('profile')
+#         else:
+#             return render(request,'profile.html',{'form':form_data})
 
 
 class SearchView(View):
@@ -169,7 +195,10 @@ class AddToFavouriteView(View):
         mid=kwargs.get('id')
         mov=Movie.objects.get(id=mid)
         user=request.user
-        Favourite.objects.create(movie=mov,user=user)
+        fav ,created=Favourite.objects.get_or_create(movie=mov,user=user)
+        # Favourite.objects.create(movie=mov,user=user)
+        if created:
+            pass
         return redirect('favlist')
     
 class FavouriteListView(ListView):
